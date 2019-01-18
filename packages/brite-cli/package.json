@@ -1,0 +1,42 @@
+{
+  "name": "@eventbrite/brite-cli",
+  "version": "1.0.0",
+  "description": "A CLI around building Eventbrite applications.",
+  "main": "dist/index.js",
+  "bin": {
+    "brite": "./bin/brite"
+  },
+  "scripts": {
+    "build:prod": "tsc -p ./tsconfig-build.json",
+    "start": "tsc --watch",
+    "postinstall": "yarn build:prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@eventbrite/brite-core": "^1.0.0",
+    "react-addons-test-utils": "^15.6.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.1",
+    "@types/node": "^10.5.7",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/src/(.*)?__tests__/.*)\\.spec.(jsx?|tsx?)$",
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}

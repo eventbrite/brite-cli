@@ -1,0 +1,8 @@
+node_modules
+
+# built assets
+dist
+build
+
+# yarn things
+yarn-error.log

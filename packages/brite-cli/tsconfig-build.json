@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig-base",
+    "compilerOptions": {
+        "outDir": "dist",
+    },
+    "include": [
+        "src",
+        "src/plugins/brite-cli-plugin-webpack/webpack.prevendors.web.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}
