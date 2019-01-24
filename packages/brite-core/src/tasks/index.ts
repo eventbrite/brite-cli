@@ -4,7 +4,7 @@ import sasslint from './sasslint';
 import {TaskFunction} from './types';
 
 export default {
-    jest,
     eslint,
     sasslint,
+    jest,
 } as {[key: string]: TaskFunction};

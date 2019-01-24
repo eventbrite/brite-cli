@@ -12,33 +12,42 @@ export default class BriteTestCommand extends BriteCommand {
      * Executes the test command
      */
     public async execute(): Promise<IBriteCommandResult> {
-        let results: boolean[] = [];
+        const results: boolean[] = [];
         let result: IBriteCommandResult = {code: 0};
-        let tasksToRun: string[] = this.options.tasks || BriteTestCommand.availableTasks;
+        const tasksToRun: string[] = this.options.tasks || BriteTestCommand.availableTasks;
 
         try {
-            results = await Promise.all<boolean>(tasksToRun.map((taskName) => {
+            // Running these in a loop for now since jest is hijacking error codes
+            // It's actually kind of nice though because if one thing fails, it exits quicker
+            // tslint:disable-next-line:prefer-for-of
+            for (const taskName of tasksToRun) {
                 const task: TaskFunction = tasks[taskName];
+                const success = await task(this.logger, this.options);
 
-                if (task) {
-                    return task(this.logger, this.options);
+                if (!success) {
+                    result = {
+                        code: 1,
+                        message: `Brite CLI task: ${taskName} failed.`,
+                    };
+
+                    break;
                 }
-                
-                throw new Error(`Failure: Task (${taskName}) does not exist. Available tasks: ${BriteTestCommand.availableTasks.join(', ')}`);
-            }));
-        } catch(e) {
+            }
+
+        } catch (e) {
             result = {
                 code: 1,
                 error: e,
                 message: e.message,
-            }
+            };
         }
 
         if (!result.error && !results.every(Boolean)) {
             result = {
                 code: 1,
-                message: 'ERROR: One of the sub tasks for the test command failed.\nPlease review console output for more details.'
-            }
+                message: `ERROR: One of the sub tasks for the test command failed\
+                    \nPlease review console output for more details.`,
+            };
         }
 
         return result;

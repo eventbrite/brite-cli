@@ -65,3 +65,5 @@ export const nullSassRules = {
     test: /\.scss$/,
     use: 'null-loader',
 };
+
+export const DEV_ASSET_PATH = '/static-dj/js/';

@@ -2,10 +2,12 @@
 import {readFileSync} from 'fs';
 import path from 'path';
 import webpack from 'webpack';
+import nodeExternals from 'webpack-node-externals';
 
 import {IBriteCommandOptions} from '../../commands';
 import {
     DEFAULT_PORT,
+    DEV_ASSET_PATH,
     DEV_ENV,
     nullSassRules,
     PROD_ENV,
@@ -53,7 +55,7 @@ const getDevServerConfig = (port) => {
     const config: webpack.Configuration = {
         devServer: {
             disableHostCheck: true,
-            publicPath: '/static-dj/js/',
+            publicPath: DEV_ASSET_PATH,
             headers: {
                 'Access-Control-Allow-Origin': '*',
             },
@@ -75,6 +77,10 @@ const getDevServerConfig = (port) => {
     return config;
 };
 
+const publicPath = process.env.MEDIA_URL
+        ? `${process.env.MEDIA_URL}/js/bundles/`
+        : DEV_ASSET_PATH;
+
 export default ({
     cwd = process.cwd(),
     env = DEV_ENV,
@@ -83,7 +89,7 @@ export default ({
 }: IBriteCommandOptions) => ({
     target: WEB_TARGET,
     bail: !DEV_ENV,
-    devtool: env === DEV_ENV ? 'cheap-source-map' : 'source-map',
+    devtool: env === DEV_ENV ? 'cheap-module-eval-source-map' : 'source-map',
     entry: {
         [getWorkspaceName(cwd)]: [
             ...getVendors(WEB_TARGET),
@@ -93,10 +99,18 @@ export default ({
             assertFileExists(path.resolve(cwd, 'index.js')),
         ],
     },
+    externals: [
+        nodeExternals({
+            modulesDir: path.resolve(cwd, 'node_modules'),
+        }),
+        nodeExternals({
+            modulesDir: path.resolve(cwd, '../../node_modules'),
+        }),
+    ],
     output: {
         path: outputPath || path.resolve(cwd, 'build'),
         filename: `[name].${WEB_TARGET}.js`,
-        publicPath: '/static-dj/js/',
+        publicPath,
         chunkFilename: `${getWorkspaceName(cwd)}.[name].async.js`,
     },
     module: {

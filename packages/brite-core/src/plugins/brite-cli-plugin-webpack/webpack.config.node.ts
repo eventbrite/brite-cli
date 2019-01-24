@@ -24,16 +24,6 @@ const getProdPlugins = (): object[] => [
     }),
 ];
 
-const getPackageDepenedcies = (pkgPath) => {
-    const packageDetails = require(pkgPath);
-
-    if (!packageDetails) {
-        return [];
-    }
-
-    return Object.keys(packageDetails.dependencies || {});
-};
-
 export default ({
     cwd = process.cwd(),
     env = DEV_ENV,
@@ -56,11 +46,9 @@ export default ({
     externals: [
         nodeExternals({
             modulesDir: path.resolve(cwd, 'node_modules'),
-            whitelist: getPackageDepenedcies(path.resolve(cwd, 'package.json')),
         }),
         nodeExternals({
             modulesDir: path.resolve(cwd, '../../node_modules'),
-            whitelist: getPackageDepenedcies(path.resolve(cwd, 'package.json')),
         }),
     ],
     module: {
