@@ -4,6 +4,7 @@ node_js:
 
 # Run the the validate script
 install:
+  - yarn global add bolt
   - bolt
 
 script:
