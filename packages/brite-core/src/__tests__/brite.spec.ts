@@ -40,13 +40,19 @@ describe('brite', () => {
             foo: 'bar',
         });
 
+        const expectedArgs = {
+            foo: 'bar',
+            cwd: process.cwd(),
+            env: 'test',
+            passThroughArgs: [],
+        };
         expect(run).toBeCalled();
         expect(run).toBeCalledWith(
             expect.objectContaining({
                 execute: expect.any(Function),
             }),
             logger,
-            { foo: 'bar' }
+            expectedArgs,
         );
         expect(logger.log).toHaveBeenNthCalledWith(1, 'Mock command message');
         expect(logger.log).toHaveBeenLastCalledWith('Command MockCommand ran in 10ms');

@@ -8,9 +8,9 @@ export default {
             browser: true,
             node: true,
         },
+        extends: 'eventbrite-react',
     },
     plugins: ['babel', 'import'],
-    extends: 'eventbrite-react',
     rules: {
         'no-invalid-this': 'off',
 

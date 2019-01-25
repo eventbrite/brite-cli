@@ -1,15 +1,16 @@
 {
   "name": "@eventbrite/brite-cli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A CLI around building Eventbrite applications.",
   "main": "dist/index.js",
   "bin": {
     "brite": "./bin/brite"
   },
   "scripts": {
-    "build:prod": "tsc -p ./tsconfig-build.json",
+    "build": "tsc -p ./tsconfig-build.json",
     "start": "tsc --watch",
-    "postinstall": "yarn build:prod"
+    "test": "echo 'plz I can haz tests'",
+    "validate": "yarn test"
   },
   "keywords": [],
   "author": "",

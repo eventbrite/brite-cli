@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "10"
+
+# Run the the validate script
+install:
+  - bolt
+
+script:
+  - bolt build
+  - bolt validate

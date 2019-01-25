@@ -36,6 +36,11 @@ const postcssLoader = {
     loader: 'postcss-loader',
     options: {
         sourceMap: true,
+        plugins: [require('postcss-cssnext')({
+            autoprefixer: {
+                browsers: ['last 2 versions'],
+            },
+        })],
     },
 };
 

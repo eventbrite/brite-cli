@@ -18,7 +18,7 @@ export default class WebpackPlugin implements IBritePlugin {
     public logger;
 
     constructor(logger: ILogger, options?: IBriteCommandOptions) {
-        const {cwd, env, port, outputPath} = options;
+        const {cwd, env, port, outputPath, basePath } = options;
 
         this.options = {
             ...options,
@@ -27,6 +27,7 @@ export default class WebpackPlugin implements IBritePlugin {
             env: env || DEV_ENV,
             port: port || DEFAULT_PORT,
             outputPath: outputPath || join(cwd, 'build'),
+            basePath: basePath || '',
         };
 
         this.logger = logger;
