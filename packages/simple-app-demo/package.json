@@ -1,0 +1,16 @@
+{
+  "name": "simple-app-demo",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "brite test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@eventbrite/brite-cli": "0.0.1"
+  }
+}
