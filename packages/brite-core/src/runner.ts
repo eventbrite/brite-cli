@@ -1,8 +1,8 @@
+import { ILogger } from '.';
 import {
     IBriteCommandConstructor,
     IBriteCommandResult,
 } from './commands';
-import { ILogger } from '.';
 
 export interface IBriteCommandRunner {
     run(

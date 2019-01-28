@@ -1,17 +1,17 @@
-import './envsetup';
 import { BriteCLI } from './brite';
-import { commands, CommandList, IBriteCommandResult } from './commands';
+import { CommandList, commands, IBriteCommandResult } from './commands';
+import './envsetup';
 import { BriteCommandRunner } from './runner';
 
 export interface ILogger {
-    log: (...args: any[]) => void,
-    error: (...args: any[]) => void,
-    debug: (...args: any[]) => void,
-};
+    log: (...args: any[]) => void;
+    error: (...args: any[]) => void;
+    debug: (...args: any[]) => void;
+}
 
 export interface IBritePlugin {
     run(command: string): Promise<IBriteCommandResult>;
-};
+}
 
 const runner = new BriteCommandRunner();
 const cli = new BriteCLI(runner, commands, console);
@@ -24,6 +24,6 @@ const cli = new BriteCLI(runner, commands, console);
  * @param options Optional options for the command
  * @param passThroughArgs  - raw arguments from the cli
  */
-export const init = (commands: CommandList, options?, passThroughArgs?) => cli.run(commands, options, passThroughArgs);
+export const init = (cmds: CommandList, options?, passThroughArgs?) => cli.run(cmds, options, passThroughArgs);
 
 export default cli;

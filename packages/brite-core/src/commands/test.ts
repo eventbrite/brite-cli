@@ -1,6 +1,6 @@
+import tasks from '../tasks';
 import {TaskFunction} from '../tasks/types';
 import {BriteCommand, IBriteCommandResult} from "./command";
-import tasks from '../tasks';
 
 /**
  * Run jest tests

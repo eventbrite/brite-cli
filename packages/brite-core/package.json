@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -p ./tsconfig-build.json",
     "start": "tsc --watch",
-    "test": "jest"
+    "test": "jest && tslint --project tsconfig.json"
   },
   "keywords": [],
   "author": "",

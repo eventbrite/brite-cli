@@ -1,7 +1,7 @@
 import { ILogger } from '../';
 
 export interface IBriteCommand {
-    logger: ILogger,
+    logger: ILogger;
     options: any;
     execute(options?): Promise<IBriteCommandResult>;
 }
@@ -17,9 +17,7 @@ export interface IBriteCommandResult {
     };
 }
 
-export interface IBriteCommandConstructor {
-    new(logger: ILogger, options?): IBriteCommand;
-}
+export type IBriteCommandConstructor = new(logger: ILogger, options?) => IBriteCommand;
 
 export interface IBriteCommandOptions {
     cwd?: string;
