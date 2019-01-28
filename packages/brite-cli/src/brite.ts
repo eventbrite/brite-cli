@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import program from 'commander';
-import * as pkg from '../package.json';
+import pkg from '../package.json';
 
 const {version} = pkg;
 

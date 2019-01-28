@@ -2,7 +2,7 @@
   "name": "@eventbrite/brite-cli",
   "version": "0.0.1",
   "description": "A CLI around building Eventbrite applications.",
-  "main": "dist/index.js",
+  "main": "dist/brite.js",
   "bin": {
     "brite": "./bin/brite"
   },
@@ -22,7 +22,7 @@
     "@types/jest": "^23.3.1",
     "@types/node": "^10.5.7",
     "tslint": "^5.11.0",
-    "typescript": "^3.0.1"
+    "typescript": "^3.2.4"
   },
   "jest": {
     "transform": {

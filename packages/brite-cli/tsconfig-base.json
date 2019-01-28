@@ -12,7 +12,6 @@
             "dom",
             "es6"
         ],
-        "downlevelIteration": true,
-        "resolveJsonModule": true
+        "downlevelIteration": true
     }
 }

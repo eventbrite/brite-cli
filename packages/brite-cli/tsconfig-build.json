@@ -4,8 +4,7 @@
         "outDir": "dist",
     },
     "include": [
-        "src",
-        "src/plugins/brite-cli-plugin-webpack/webpack.prevendors.web.ts"
+        "./src"
     ],
     "exclude": [
         "node_modules",

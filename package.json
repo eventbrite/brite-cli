@@ -10,6 +10,7 @@
     ]
   },
   "scripts": {
+    "clean": "bolt ws exec -- rm -rf dist",
     "build": "bolt ws build",
     "test": "bolt ws test"
   },
