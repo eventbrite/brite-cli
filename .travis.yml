@@ -4,6 +4,9 @@ node_js:
 
 cache: yarn
 
+before_install:
+  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+
 # Run the the validate script
 install:
   - yarn global add bolt
