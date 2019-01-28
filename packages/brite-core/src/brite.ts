@@ -1,5 +1,5 @@
 import { ILogger } from '.';
-import { IBriteCommandOptions, IBriteCommandResult } from './commands';
+import { IBriteCommandOptions, BriteCommandResult } from './commands';
 import { IBriteCommandRunner } from './runner';
 
 const DEFAULT_OPTIONS: IBriteCommandOptions = {
@@ -8,7 +8,7 @@ const DEFAULT_OPTIONS: IBriteCommandOptions = {
 };
 
 export interface IBriteCLI<T> {
-    run(task: keyof T): Promise<IBriteCommandResult>;
+    run(task: keyof T): Promise<BriteCommandResult>;
 }
 
 /**

@@ -1,7 +1,7 @@
 import { join } from 'path';
 
 import { IBritePlugin, ILogger } from '../..';
-import { IBriteCommandOptions, IBriteCommandResult } from '../../commands';
+import { IBriteCommandOptions, BriteCommandResult } from '../../commands';
 
 import { DEFAULT_PORT, DEV_ENV } from './common';
 import {
@@ -36,7 +36,7 @@ export default class WebpackPlugin implements IBritePlugin {
     /**
      * Run a webpack build or start a dev server
      */
-    public async run(command: 'build' | 'start'): Promise<IBriteCommandResult>  {
+    public async run(command: 'build' | 'start'): Promise<BriteCommandResult>  {
         if (command === 'build') {
             return await this.runBuild();
         } else if (command === 'start') {
@@ -48,13 +48,13 @@ export default class WebpackPlugin implements IBritePlugin {
             error,
             message: error.message,
             code: 1,
-        } as IBriteCommandResult;
+        } as BriteCommandResult;
     }
 
     /**
      * Run a webpack build for node and web
      */
-    private async runBuild(): Promise<IBriteCommandResult> {
+    private async runBuild(): Promise<BriteCommandResult> {
         let result = await runWebpack(getNodeConfig(this.options), 'run', this.logger);
 
         if (result.code !== 0) {
@@ -73,7 +73,7 @@ export default class WebpackPlugin implements IBritePlugin {
     /**
      * Start up a webpack watch mode for the server, and a webpack dev server for web
      */
-    private async runStart(): Promise<IBriteCommandResult> {
+    private async runStart(): Promise<BriteCommandResult> {
         let result = getResultOk();
 
         try {
