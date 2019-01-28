@@ -4,9 +4,6 @@
   "description": "",
   "private": true,
   "main": "index.js",
-  "scripts": {
-    "test": "brite test"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
