@@ -1,19 +1,20 @@
 import tasks from '../tasks';
 import {TaskFunction} from '../tasks/types';
-import {BriteCommand, IBriteCommandResult} from "./command";
+import {BaseBriteCommand, BriteCommandResult} from "./command";
 
 /**
  * Run jest tests
  */
-export default class BriteTestCommand extends BriteCommand {
+export default class BriteTestCommand extends BaseBriteCommand {
     public static availableTasks: string[] = Object.keys(tasks);
+    public defaultEnvironment = 'test';
 
     /**
      * Executes the test command
      */
-    public async execute(): Promise<IBriteCommandResult> {
+    public async execute(): Promise<BriteCommandResult> {
         const results: boolean[] = [];
-        let result: IBriteCommandResult = {code: 0};
+        let result: BriteCommandResult = {code: 0};
         const tasksToRun: string[] = this.options.tasks || BriteTestCommand.availableTasks;
 
         try {
@@ -51,12 +52,5 @@ export default class BriteTestCommand extends BriteCommand {
         }
 
         return result;
-    }
-
-    /**
-     * Sets the default environment to test
-     */
-    public setDefaultEnvironment() {
-        process.env.NODE_ENV = process.env.NODE_ENV || 'test';
     }
 }

@@ -5,11 +5,11 @@ import { default as test } from './test';
 export const commands = { start, test, build };
 
 export {
-    IBriteCommand,
-    IBriteCommandResult,
-    IBriteCommandConstructor,
+    BaseBriteCommand,
+    BriteCommandResult as IBriteCommandResult,
+    BriteCommandConstructor as IBriteCommandConstructor,
     IBriteCommandOptions,
-    BriteCommand,
+    BaseBriteCommand as BriteCommand,
 } from './command';
 
 /**

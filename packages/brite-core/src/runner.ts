@@ -28,6 +28,7 @@ export class BriteCommandRunner implements IBriteCommandRunner {
         let result: IBriteCommandResult = { code: 0 };
 
         try {
+            command.before();
             result = await command.execute();
         } catch (error) {
             const message = `ERROR: brite-cli failed to execute command.\
@@ -42,6 +43,7 @@ export class BriteCommandRunner implements IBriteCommandRunner {
 
         const end = Date.now();
 
+        result.environment = process.env.NODE_ENV;
         result.stats = {
             totalTime: (end - start),
         };
