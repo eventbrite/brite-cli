@@ -2,7 +2,7 @@ import { TaskFunction } from '../types';
 import jestConfigBuilder from './configs/jest.config';
 
 // tslint:disable-next-line:no-var-requires
-const jest = require('jest');
+const jestRunner = require('jest');
 
 const jestTask: TaskFunction = async (logger, {cwd, passThroughArgs = []}) => {
     const jestConfig = jestConfigBuilder(cwd);
@@ -14,9 +14,9 @@ const jestTask: TaskFunction = async (logger, {cwd, passThroughArgs = []}) => {
     ];
 
     try {
-        logger.debug(`jest version: ${jest.getVersion()}`);
+        logger.debug(`jest version: ${jestRunner.getVersion()}`);
 
-        await jest.run(jestArgs);
+        await jestRunner.run(jestArgs);
 
         return true;
     } catch (ex) {

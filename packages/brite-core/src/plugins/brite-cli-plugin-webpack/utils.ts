@@ -5,7 +5,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
 import {ILogger} from '../..';
-import {IBriteCommandResult} from '../../commands';
+import {BriteCommandResult} from '../../commands';
 import {WEB_TARGET} from './common';
 
 export const getWorkspaceName = (cwd = process.cwd()): string => {
@@ -55,7 +55,7 @@ const runCompilerCommand = (compilerCommand, logger: ILogger): any =>
         }),
     );
 
-export const getResultOk = (message = 'finished.'): IBriteCommandResult => ({
+export const getResultOk = (message = 'finished.'): BriteCommandResult => ({
     code: 0,
     message,
 });
@@ -79,8 +79,8 @@ const addLogging = (
     });
 };
 
-export const runWebpackDevServer = (config: any, logger: ILogger): Promise<IBriteCommandResult> => (
-    new Promise<IBriteCommandResult>((resolve, reject) => {
+export const runWebpackDevServer = (config: any, logger: ILogger): Promise<BriteCommandResult> => (
+    new Promise<BriteCommandResult>((resolve, reject) => {
         let result = getResultOk();
 
         try {
@@ -125,8 +125,8 @@ export const runWebpackDevServer = (config: any, logger: ILogger): Promise<IBrit
 );
 
 export const parseResults = (
-    results: IBriteCommandResult[],
-): IBriteCommandResult => {
+    results: BriteCommandResult[],
+): BriteCommandResult => {
     const result = results.find(({code}) => code !== 0);
 
     if (result) {
@@ -140,8 +140,8 @@ export const runWebpack = async (
     config: any,
     command: string,
     logger: ILogger,
-): Promise<IBriteCommandResult> => {
-    let result: IBriteCommandResult = {code: 0};
+): Promise<BriteCommandResult> => {
+    let result: BriteCommandResult = {code: 0};
 
     try {
         const workspaceName = getWorkspaceName(config.cmd);

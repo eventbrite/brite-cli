@@ -1,13 +1,8 @@
 import { ILogger } from '../';
 
-export interface IBriteCommand {
-    logger: ILogger;
-    options: any;
-    execute(options?): Promise<IBriteCommandResult>;
-}
-
-export interface IBriteCommandResult {
+export interface BriteCommandResult {
     code: number;
+    environment?: string;
     error?: Error;
     message?: string;
     data?: any;
@@ -17,7 +12,7 @@ export interface IBriteCommandResult {
     };
 }
 
-export type IBriteCommandConstructor = new(logger: ILogger, options?) => IBriteCommand;
+export type BriteCommandConstructor = new(logger: ILogger, options?) => BaseBriteCommand;
 
 export interface IBriteCommandOptions {
     cwd?: string;
@@ -32,9 +27,10 @@ export interface IBriteCommandOptions {
  * An abstract class for use in creating new commands.
  * The options passed ot the constructor are available on `this.options`
  */
-export abstract class BriteCommand implements IBriteCommand {
+export abstract class BaseBriteCommand {
     public options;
     public logger;
+    public abstract defaultEnvironment: string;
 
     constructor(logger, options) {
         this.options = options;
@@ -42,7 +38,21 @@ export abstract class BriteCommand implements IBriteCommand {
     }
 
     /**
+     * Run before execute
+     */
+    public before() {
+        this.setDefaultEnvironment();
+    }
+
+    /**
      * Extend the execute method in a command
      */
-    public abstract async execute(): Promise<IBriteCommandResult>;
+    public abstract async execute(): Promise<BriteCommandResult>;
+
+    /**
+     * Sets up the default environment this task should run in
+     */
+    private setDefaultEnvironment() {
+        process.env.NODE_ENV = process.env.NODE_ENV || this.defaultEnvironment || 'development';
+    }
 }

@@ -1,15 +1,15 @@
 import { ILogger } from '.';
 import {
-    IBriteCommandConstructor,
-    IBriteCommandResult,
+    BriteCommandConstructor,
+    BriteCommandResult,
 } from './commands';
 
 export interface IBriteCommandRunner {
     run(
-        Command: IBriteCommandConstructor,
+        Command: BriteCommandConstructor,
         logger: ILogger,
         options?,
-    ): Promise<IBriteCommandResult>;
+    ): Promise<BriteCommandResult>;
 }
 
 /**
@@ -18,16 +18,17 @@ export interface IBriteCommandRunner {
 export class BriteCommandRunner implements IBriteCommandRunner {
 
     public async run(
-        Command: IBriteCommandConstructor,
+        Command: BriteCommandConstructor,
         logger: ILogger,
         options?,
-    ): Promise<IBriteCommandResult> {
+    ): Promise<BriteCommandResult> {
         const command = new Command(logger, options);
         const start = Date.now();
 
-        let result: IBriteCommandResult = { code: 0 };
+        let result: BriteCommandResult = { code: 0 };
 
         try {
+            command.before();
             result = await command.execute();
         } catch (error) {
             const message = `ERROR: brite-cli failed to execute command.\
@@ -42,6 +43,7 @@ export class BriteCommandRunner implements IBriteCommandRunner {
 
         const end = Date.now();
 
+        result.environment = process.env.NODE_ENV;
         result.stats = {
             totalTime: (end - start),
         };

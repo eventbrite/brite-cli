@@ -1,5 +1,5 @@
 import { BriteCLI } from './brite';
-import { CommandList, commands, IBriteCommandResult } from './commands';
+import { BriteCommandResult, CommandList, commands } from './commands';
 import './envsetup';
 import { BriteCommandRunner } from './runner';
 
@@ -10,7 +10,7 @@ export interface ILogger {
 }
 
 export interface IBritePlugin {
-    run(command: string): Promise<IBriteCommandResult>;
+    run(command: string): Promise<BriteCommandResult>;
 }
 
 const runner = new BriteCommandRunner();

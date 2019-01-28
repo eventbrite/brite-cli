@@ -1,5 +1,5 @@
 import { BriteCLI } from '../brite';
-import { IBriteCommandConstructor } from '../commands';
+import { BriteCommandConstructor } from '../commands';
 
 describe('brite', () => {
     let cli;
@@ -15,7 +15,7 @@ describe('brite', () => {
         const MockRunner = jest.fn(() => ({
             run,
         }));
-        const MockCommand = jest.fn<IBriteCommandConstructor>(() => ({
+        const MockCommand = jest.fn<BriteCommandConstructor>(() => ({
             name: 'MockCommand',
             execute: () => new Promise((resolve) => resolve({ code: 0, message: 'Mock command message' })),
         }));
