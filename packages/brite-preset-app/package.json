@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {},
   "keywords": [],
+  "private": true,
   "author": "",
   "license": "ISC",
   "dependencies": {},
