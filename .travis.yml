@@ -11,4 +11,4 @@ install:
 
 script:
   - bolt build
-  - bolt validate
+  - bolt test
