@@ -52,4 +52,11 @@ export default class BriteTestCommand extends BriteCommand {
 
         return result;
     }
+
+    /**
+     * Sets the default environment to test
+     */
+    public setDefaultEnvironment() {
+        process.env.NODE_ENV = process.env.NODE_ENV || 'test';
+    }
 }

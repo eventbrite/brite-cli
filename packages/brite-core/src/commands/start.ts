@@ -12,4 +12,11 @@ export default class BriteStartCommand extends BriteCommand {
     public async execute(): Promise<IBriteCommandResult> {
         return new WebpackPlugin(this.logger, this.options).run('start');
     }
+
+    /**
+     * Sets the default environment to development
+     */
+    public setDefaultEnvironment() {
+        process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+    }
 }
