@@ -6,11 +6,6 @@
   "bin": {
     "brite": "./bin/brite"
   },
-  "scripts": {
-    "build": "tsc -p ./tsconfig-build.json",
-    "start": "tsc --watch",
-    "test": "echo 'TODO: plz I can haz tests'"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

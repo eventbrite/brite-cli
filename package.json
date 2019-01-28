@@ -11,8 +11,9 @@
   },
   "scripts": {
     "clean": "bolt ws exec -- rm -rf dist",
-    "build": "bolt ws build",
-    "test": "bolt ws test"
+    "build": "bolt clean && bolt ws exec -- $(pwd)/scripts/tsc.sh",
+    "lint": "bolt ws exec -- tslint --project $(pwd)/tsconfig.json",
+    "test": "jest"
   },
   "dependencies": {
     "@types/jest": "^23.3.1",
@@ -69,5 +70,25 @@
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1",
     "webpack-node-externals": "^1.7.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/src/(.*)?__tests__/.*)\\.spec.(jsx?|tsx?)$",
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "./tsconfig.json"
+      }
+    }
   }
 }

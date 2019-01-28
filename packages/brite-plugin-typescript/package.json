@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "A CLI around building Eventbrite applications.",
   "main": "dist/index.js",
-  "scripts": {
-    "start": "tsc --watch"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

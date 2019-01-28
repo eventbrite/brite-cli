@@ -8,10 +8,10 @@
         "declaration": true,
         "experimentalDecorators": true,
         "noUnusedLocals": true,
-        "lib": [
-            "dom",
-            "es6"
-        ],
-        "downlevelIteration": true
-    }
+        "downlevelIteration": true,
+        "lib": ["dom", "es6"]
+    },
+    "exclude": [
+        "**/*.spec.ts"
+    ]
 }

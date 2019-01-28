@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "A CLI around building Eventbrite applications.",
   "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc -p ./tsconfig-build.json",
-    "start": "tsc --watch",
-    "test": "jest && tslint --project tsconfig.json"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -67,20 +62,5 @@
     "ts-node": "^7.0.0",
     "tslint": "^5.11.0",
     "typescript": "^3.2.4"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/src/(.*)?__tests__/.*)\\.spec.(jsx?|tsx?)$",
-    "testEnvironment": "node",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   }
 }
