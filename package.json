@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "bolt ws build",
-    "validate": "bolt ws validate"
+    "test": "bolt ws test"
   },
   "dependencies": {
     "@types/jest": "^23.3.1",

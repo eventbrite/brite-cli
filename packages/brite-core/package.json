@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -p ./tsconfig-build.json",
     "start": "tsc --watch",
-    "validate": "jest"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
