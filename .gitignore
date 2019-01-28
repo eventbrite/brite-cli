@@ -6,3 +6,5 @@ build
 
 # yarn things
 yarn-error.log
+.eslintcache
+junit.xml

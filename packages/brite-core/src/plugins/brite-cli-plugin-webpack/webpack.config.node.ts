@@ -28,6 +28,7 @@ export default ({
     cwd = process.cwd(),
     env = DEV_ENV,
     outputPath,
+    basePath,
 }: IBriteCommandOptions) => ({
     bail: true,
     target: NODE_TARGET,
@@ -35,7 +36,7 @@ export default ({
     entry: {
         [getWorkspaceName(cwd)]: [
             ...getVendors(NODE_TARGET),
-            assertFileExists(path.resolve(cwd, 'App.js')),
+            assertFileExists(path.resolve(cwd, basePath, 'App.js')),
         ],
     },
     output: {

@@ -27,6 +27,7 @@ export interface IBriteCommandOptions {
     port?: number;
     outputPath?: string;
     passThroughArgs?: string[];
+    basePath?: string;
 }
 
 /**

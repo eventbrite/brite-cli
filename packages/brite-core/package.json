@@ -4,9 +4,9 @@
   "description": "A CLI around building Eventbrite applications.",
   "main": "dist/index.js",
   "scripts": {
-    "build:prod": "tsc -p ./tsconfig-build.json",
+    "build": "tsc -p ./tsconfig-build.json",
     "start": "tsc --watch",
-    "postinstall": "yarn build:prod"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-dynamic-import-node": "^2.0.0",
+    "babel-plugin-dynamic-import-webpack": "1.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "6.23.0",
@@ -45,9 +46,12 @@
     "node-sass": "^4.5.0",
     "node-sass-json-importer": "^3.3.1",
     "null-loader": "^0.1.1",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-loader": "^3.0.0",
     "react": "15.4.2",
     "react-app-polyfill": "^0.2.0",
     "react-dom": "15.4.2",
+    "react-hot-loader": "^4.6.3",
     "sass-lint": "^1.12.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",

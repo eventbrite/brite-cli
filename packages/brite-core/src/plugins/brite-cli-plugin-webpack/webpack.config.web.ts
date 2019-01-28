@@ -86,6 +86,7 @@ export default ({
     env = DEV_ENV,
     port = DEFAULT_PORT,
     outputPath,
+    basePath,
 }: IBriteCommandOptions) => ({
     target: WEB_TARGET,
     bail: !DEV_ENV,
@@ -96,7 +97,7 @@ export default ({
             ...(env === DEV_ENV
                 ? [`webpack-dev-server/client?https://www.evbdev.com:${port}`]
                 : []),
-            assertFileExists(path.resolve(cwd, 'index.js')),
+            assertFileExists(path.resolve(cwd, basePath, 'index.js')),
         ],
     },
     externals: [
