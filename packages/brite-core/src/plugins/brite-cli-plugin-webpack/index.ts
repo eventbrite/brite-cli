@@ -1,7 +1,7 @@
 import { join } from 'path';
 
 import { IBritePlugin, ILogger } from '../..';
-import { IBriteCommandOptions, BriteCommandResult } from '../../commands';
+import { BriteCommandResult, IBriteCommandOptions } from '../../commands';
 
 import { DEFAULT_PORT, DEV_ENV } from './common';
 import {

@@ -1,5 +1,5 @@
 import { ILogger } from '.';
-import { IBriteCommandOptions, BriteCommandResult } from './commands';
+import { BriteCommandResult, IBriteCommandOptions } from './commands';
 import { IBriteCommandRunner } from './runner';
 
 const DEFAULT_OPTIONS: IBriteCommandOptions = {
