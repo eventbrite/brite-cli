@@ -1,6 +1,6 @@
-import { IBriteCommandRunner } from './runner';
-import { IBriteCommandResult, IBriteCommandOptions } from './commands';
 import { ILogger } from '.';
+import { IBriteCommandOptions, IBriteCommandResult } from './commands';
+import { IBriteCommandRunner } from './runner';
 
 const DEFAULT_OPTIONS: IBriteCommandOptions = {
     cwd: process.cwd(),
@@ -17,9 +17,9 @@ export interface IBriteCLI<T> {
  * the `keyof T` will take strings of `start`, `test`, or `build`.
  */
 export class BriteCLI<T> implements IBriteCLI<T> {
-    private logger;
     public commandRunner: IBriteCommandRunner;
     public commands;
+    private logger;
 
     constructor(
         commandRunner: IBriteCommandRunner,

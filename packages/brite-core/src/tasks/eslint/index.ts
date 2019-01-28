@@ -5,7 +5,7 @@ import defaults from './defaults';
 const eslintTask: TaskFunction = async (logger, { cwd }) => {
   const cli = new CLIEngine({
       cwd,
-      ...defaults
+      ...defaults,
   });
 
   logger.debug(`eslint version: ${CLIEngine.version}`);

@@ -1,5 +1,5 @@
-import { BriteCommand, IBriteCommandResult } from './command';
 import WebpackPlugin from '../plugins/brite-cli-plugin-webpack';
+import { BriteCommand, IBriteCommandResult } from './command';
 
 /**
  * Run a build

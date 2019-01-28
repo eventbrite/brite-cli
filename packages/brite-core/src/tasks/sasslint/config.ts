@@ -1,6 +1,6 @@
 export const SASS_CONFIG = {
     options: {
-      formatter: 'stylish',
+      "formatter": 'stylish',
       'merge-default-rules': false,
     },
     files: {
@@ -18,7 +18,7 @@ export const SASS_CONFIG = {
       'hex-length': 0,
       'hex-notation': 0,
       'id-name-format': 0,
-      indentation: [
+      "indentation": [
         2,
         {
           size: 4,
@@ -42,7 +42,7 @@ export const SASS_CONFIG = {
       'placeholder-in-extend': 0,
       'placeholder-name-format': 0,
       'property-sort-order': 0,
-      quotes: 0,
+      "quotes": 0,
       'shorthand-values': 0,
       'single-line-per-selector': 0,
       'space-after-colon': 2,
@@ -56,5 +56,3 @@ export const SASS_CONFIG = {
       'zero-unit': 0,
     },
   };
-
-  

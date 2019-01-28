@@ -1,17 +1,17 @@
 import { join } from 'path';
 
-import { ILogger, IBritePlugin } from '../..';
-import { IBriteCommandResult, IBriteCommandOptions } from '../../commands';
+import { IBritePlugin, ILogger } from '../..';
+import { IBriteCommandOptions, IBriteCommandResult } from '../../commands';
 
-import getNodeConfig from './webpack.config.node';
-import getWebConfig from './webpack.config.web';
+import { DEFAULT_PORT, DEV_ENV } from './common';
 import {
     getResultOk,
     parseResults,
     runWebpack,
     runWebpackDevServer,
 } from './utils';
-import { DEV_ENV, DEFAULT_PORT } from './common';
+import getNodeConfig from './webpack.config.node';
+import getWebConfig from './webpack.config.web';
 
 export default class WebpackPlugin implements IBritePlugin {
     public options;
@@ -83,12 +83,12 @@ export default class WebpackPlugin implements IBritePlugin {
             ]);
 
             result = parseResults(results);
-        } catch(e) {
+        } catch (e) {
             result = {
                 code: 1,
                 error: e,
                 message: `webpack start failed to boot: ${e.message}`,
-            }
+            };
         }
 
         return result;
