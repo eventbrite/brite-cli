@@ -1,8 +1,8 @@
 import { ILogger } from "..";
-import { BriteCommand } from "../commands";
+import { BaseBriteCommand } from "../commands";
 import { BriteCommandRunner } from "../runner";
 
-class FakeCommand extends BriteCommand {
+class FakeCommand extends BaseBriteCommand {
     public defaultEnvironment = 'myenv';
 
     public async execute() {
@@ -13,24 +13,49 @@ class FakeCommand extends BriteCommand {
 }
 
 describe('Brite Commands', () => {
-    let runner: BriteCommandRunner;
-    const env = process.env.NODE_ENV;
+    describe('when node_env is set via env vars passed in', () => {
+        let runner: BriteCommandRunner;
+        const env = process.env.NODE_ENV;
 
-    beforeEach(() => {
-        // Temporarily delete just to make sure we can actually set it
-        delete process.env.NODE_ENV;
-        runner = new BriteCommandRunner();
+        beforeEach(() => {
+            // Temporarily delete just to make sure we can actually set it
+            process.env.NODE_ENV = 'another thing';
+            runner = new BriteCommandRunner();
+        });
+
+        afterEach(() => {
+            // Put it back!
+            process.env.NODE_ENV = env;
+        });
+
+        it('should set the default environment', async () => {
+            const Logger = jest.fn<ILogger>();
+            const result = await runner.run(FakeCommand, new Logger(), {});
+
+            expect(result.environment).toEqual('another thing');
+        });
     });
 
-    afterEach(() => {
-        // Put it back!
-        process.env.NODE_ENV = env;
-    });
+    describe('when node_env is NOT set', () => {
+        let runner: BriteCommandRunner;
+        const env = process.env.NODE_ENV;
 
-    it('should set the default environment', async () => {
-        const Logger = jest.fn<ILogger>();
-        const result = await runner.run(FakeCommand, new Logger(), {});
+        beforeEach(() => {
+            // Temporarily delete just to make sure we can actually set it
+            delete process.env.NODE_ENV;
+            runner = new BriteCommandRunner();
+        });
 
-        expect(result.environment).toEqual('myenv');
+        afterEach(() => {
+            // Put it back!
+            process.env.NODE_ENV = env;
+        });
+
+        it('should set the default environment', async () => {
+            const Logger = jest.fn<ILogger>();
+            const result = await runner.run(FakeCommand, new Logger(), {});
+
+            expect(result.environment).toEqual('myenv');
+        });
     });
 });
