@@ -6,10 +6,9 @@ export const commands = { start, test, build };
 
 export {
     BaseBriteCommand,
-    BriteCommandResult as IBriteCommandResult,
-    BriteCommandConstructor as IBriteCommandConstructor,
+    BriteCommandResult,
+    BriteCommandConstructor,
     IBriteCommandOptions,
-    BaseBriteCommand as BriteCommand,
 } from './command';
 
 /**
