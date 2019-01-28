@@ -4,6 +4,7 @@
   "description": "A CLI around building Eventbrite applications.",
   "main": "dist/index.js",
   "keywords": [],
+  "private": true,
   "author": "",
   "license": "ISC",
   "dependencies": {},
