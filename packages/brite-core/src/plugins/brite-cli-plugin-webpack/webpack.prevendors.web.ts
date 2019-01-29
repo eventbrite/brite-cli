@@ -6,11 +6,11 @@
 // the best solution. This could easily break as we bump `babel-polyfill`,
 // but we'll know pretty quickly.
 interface MyWindow extends Window {
-    _babelPolyfill: boolean;
+	_babelPolyfill: boolean;
 }
 
 const myWindow = window as MyWindow;
 
 if (myWindow._babelPolyfill) {
-    delete myWindow._babelPolyfill;
+	delete myWindow._babelPolyfill;
 }

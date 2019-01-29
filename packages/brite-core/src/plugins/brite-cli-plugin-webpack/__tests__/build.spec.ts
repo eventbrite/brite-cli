@@ -1,53 +1,81 @@
-import { execSync } from 'child_process';
-import { existsSync } from 'fs';
-import { join, resolve } from 'path';
-import WebpackPlugin from '../';
+import { execSync } from "child_process";
+import { existsSync } from "fs";
+import { join, resolve } from "path";
+import WebpackPlugin from "../";
 
-const TEST_APP_DIR = resolve(__dirname, './__fixtures__/test-app');
+const TEST_APP_DIR = resolve(__dirname, "./__fixtures__/test-app");
 const BUILD_TIMEOUT = 20000;
 const cleanTestBuildDir = () => {
-    execSync(`rm -rf ${join(TEST_APP_DIR, 'build')}`);
+	execSync(`rm -rf ${join(TEST_APP_DIR, "build")}`);
 };
 
-describe('build', () => {
-    beforeEach(() => {
-        cleanTestBuildDir();
-    });
+describe("build", () => {
+	beforeEach(() => {
+		cleanTestBuildDir();
+	});
 
-    afterEach(() => {
-        cleanTestBuildDir();
-    });
+	afterEach(() => {
+		cleanTestBuildDir();
+	});
 
-    describe('development', () => {
+	describe("development", () => {
+		it(
+			"should build the web and node bundles",
+			async () => {
+				await new WebpackPlugin(console, {
+					cwd: TEST_APP_DIR,
+					basePath: "src",
+				}).run("build");
 
-        it('should build the web and node bundles', async () => {
-            await new WebpackPlugin(console, {cwd: TEST_APP_DIR, basePath: 'src'}).run('build');
+				// expect regular bundles and maps to be present
+				expect(existsSync(join(TEST_APP_DIR, "build/test-app.web.js"))).toBe(
+					true,
+				);
+				expect(existsSync(join(TEST_APP_DIR, "build/test-app.node.js"))).toBe(
+					true,
+				);
+				// expect css not to be extracted
+				expect(existsSync(join(TEST_APP_DIR, "build/test-app.css"))).toBe(
+					false,
+				);
+				expect(existsSync(join(TEST_APP_DIR, "build/test-app.css.map"))).toBe(
+					false,
+				);
+			},
+			BUILD_TIMEOUT,
+		);
+	});
 
-            // expect regular bundles and maps to be present
-            expect(existsSync(join(TEST_APP_DIR, 'build/test-app.web.js'))).toBe(true);
-            expect(existsSync(join(TEST_APP_DIR, 'build/test-app.node.js'))).toBe(true);
-            // expect css not to be extracted
-            expect(existsSync(join(TEST_APP_DIR, 'build/test-app.css'))).toBe(false);
-            expect(existsSync(join(TEST_APP_DIR, 'build/test-app.css.map'))).toBe(false);
-        }, BUILD_TIMEOUT);
-    });
+	describe("production", () => {
+		it(
+			"should should create node, web and css bundles",
+			async () => {
+				await new WebpackPlugin(console, {
+					cwd: TEST_APP_DIR,
+					env: "production",
+					basePath: "src",
+				}).run("build");
 
-    describe('production', () => {
-        it('should should create node, web and css bundles', async () => {
-            await new WebpackPlugin(console, {
-                cwd: TEST_APP_DIR,
-                env: 'production',
-                basePath: 'src',
-            }).run('build');
-
-            // expect regular bundles and maps to be present
-            expect(existsSync(join(TEST_APP_DIR, 'build/test-app.web.js'))).toBe(true);
-            expect(existsSync(join(TEST_APP_DIR, 'build/test-app.web.js.map'))).toBe(true);
-            expect(existsSync(join(TEST_APP_DIR, 'build/test-app.node.js'))).toBe(true);
-            expect(existsSync(join(TEST_APP_DIR, 'build/test-app.node.js.map'))).toBe(true);
-            // expect css to be present
-            expect(existsSync(join(TEST_APP_DIR, 'build/test-app.css'))).toBe(true);
-            expect(existsSync(join(TEST_APP_DIR, 'build/test-app.css.map'))).toBe(true);
-        }, BUILD_TIMEOUT);
-    });
+				// expect regular bundles and maps to be present
+				expect(existsSync(join(TEST_APP_DIR, "build/test-app.web.js"))).toBe(
+					true,
+				);
+				expect(
+					existsSync(join(TEST_APP_DIR, "build/test-app.web.js.map")),
+				).toBe(true);
+				expect(existsSync(join(TEST_APP_DIR, "build/test-app.node.js"))).toBe(
+					true,
+				);
+				expect(
+					existsSync(join(TEST_APP_DIR, "build/test-app.node.js.map")),
+				).toBe(true);
+				// expect css to be present
+				expect(existsSync(join(TEST_APP_DIR, "build/test-app.css"))).toBe(true);
+				expect(existsSync(join(TEST_APP_DIR, "build/test-app.css.map"))).toBe(
+					true,
+				);
+			},
+			BUILD_TIMEOUT,
+		);
+	});
 });

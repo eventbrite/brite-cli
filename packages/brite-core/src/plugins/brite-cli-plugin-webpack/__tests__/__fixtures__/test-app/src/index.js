@@ -1,3 +1,3 @@
-import App from './App';
+import App from "./App";
 
-console.log('i am index!!!');
+console.log("i am index!!!");

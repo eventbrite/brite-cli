@@ -1,15 +1,15 @@
-import { default as build } from './build';
-import { default as start } from './start';
-import { default as test } from './test';
+import { default as build } from "./build";
+import { default as start } from "./start";
+import { default as test } from "./test";
 
 export const commands = { start, test, build };
 
 export {
-    BaseBriteCommand,
-    BriteCommandResult,
-    BriteCommandConstructor,
-    IBriteCommandOptions,
-} from './command';
+	BaseBriteCommand,
+	BriteCommandResult,
+	BriteCommandConstructor,
+	IBriteCommandOptions,
+} from "./command";
 
 /**
  * This creates a dynamic string type of all available default commands

@@ -1,3 +1,3 @@
 export default (log) => {
-    log('do a thing');
+	log("do a thing");
 };
