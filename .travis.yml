@@ -5,7 +5,8 @@ node_js:
 cache: yarn
 
 before_install:
-  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+  - echo ${FAKE_NPM_TOKEN}
+  - echo "//registry.npmjs.org/:_authToken=\${FAKE_NPM_TOKEN}" > .npmrc
 
 # Run the the validate script
 install:
@@ -19,6 +20,6 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: bolt publish
+  script: cat .npmrc && bolt publish
   on:
-    master
+    publish-branch
