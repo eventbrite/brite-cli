@@ -1,28 +1,30 @@
-import { TaskFunction } from '../types';
-import jestConfigBuilder from './configs/jest.config';
+import { TaskFunction } from "../types";
+import jestConfigBuilder from "./configs/jest.config";
 
-// tslint:disable-next-line:no-var-requires
-const jestRunner = require('jest');
+const jestRunner = require("jest");
 
-const jestTask: TaskFunction = async (logger, {cwd, passThroughArgs = []}) => {
-    const jestConfig = jestConfigBuilder(cwd);
-    const jestArgs = [
-        ...passThroughArgs,
-        '--config',
-        JSON.stringify(jestConfig),
-        '--no-cache',
-    ];
+const jestTask: TaskFunction = async (
+	logger,
+	{ cwd, passThroughArgs = [] },
+) => {
+	const jestConfig = jestConfigBuilder(cwd);
+	const jestArgs = [
+		...passThroughArgs,
+		"--config",
+		JSON.stringify(jestConfig),
+		"--no-cache",
+	];
 
-    try {
-        logger.debug(`jest version: ${jestRunner.getVersion()}`);
+	try {
+		logger.debug(`jest version: ${jestRunner.getVersion()}`);
 
-        await jestRunner.run(jestArgs);
+		await jestRunner.run(jestArgs);
 
-        return true;
-    } catch (ex) {
-        logger.error(ex);
-        return false;
-    }
+		return true;
+	} catch (ex) {
+		logger.error(ex);
+		return false;
+	}
 };
 
 export default jestTask;

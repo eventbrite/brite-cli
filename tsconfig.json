@@ -1,17 +1,15 @@
 {
-    "compilerOptions": {
-        "pretty": true,
-        "target": "es2017",
-        "module": "commonjs",
-        "jsx": "react",
-        "esModuleInterop": true,
-        "declaration": true,
-        "experimentalDecorators": true,
-        "noUnusedLocals": true,
-        "downlevelIteration": true,
-        "lib": ["dom", "es6"]
-    },
-    "exclude": [
-        "**/*.spec.ts"
-    ]
+	"compilerOptions": {
+		"pretty": true,
+		"target": "es2017",
+		"module": "commonjs",
+		"jsx": "react",
+		"esModuleInterop": true,
+		"declaration": true,
+		"experimentalDecorators": true,
+		"noUnusedLocals": true,
+		"downlevelIteration": true,
+		"lib": ["dom", "es6"]
+	},
+	"exclude": ["**/*.spec.ts"]
 }

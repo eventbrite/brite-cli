@@ -1,24 +1,24 @@
 language: node_js
 node_js:
-  - "10"
+    - "10"
 
 cache: yarn
 
 # Run the the validate script
 install:
-  - yarn global add bolt
-  - bolt
+    - yarn global add bolt
+    - bolt
 
 script:
-  - bolt build
-  - bolt test
+    - bolt build
+    - bolt test
 
 before_deploy:
-  - printf "//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n" >> $HOME/.npmrc 2> /dev/null
+    - printf "//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n" >> $HOME/.npmrc 2> /dev/null
 
 deploy:
-  skip_cleanup: true
-  provider: script
-  script: bolt publish
-  on:
-    master
+    skip_cleanup: true
+    provider: script
+    script: bolt publish
+    on:
+        branch: master

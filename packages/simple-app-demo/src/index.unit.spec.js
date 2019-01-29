@@ -1,10 +1,10 @@
-import log from '../src';
+import log from "../src";
 
-describe('simple test', () => {
-    it('should pass', () => {
-        const spy = jest.fn();
+describe("simple test", () => {
+	it("should pass", () => {
+		const spy = jest.fn();
 
-        log(spy);
-        expect(spy).toHaveBeenCalled();
-    });
+		log(spy);
+		expect(spy).toHaveBeenCalled();
+	});
 });

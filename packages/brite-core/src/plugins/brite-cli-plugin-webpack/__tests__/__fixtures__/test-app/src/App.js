@@ -1,3 +1,3 @@
-import './styles.scss';
+import "./styles.scss";
 
-console.log('hi i am the app bundle me!');
+console.log("hi i am the app bundle me!");
