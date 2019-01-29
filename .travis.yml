@@ -4,9 +4,6 @@ node_js:
 
 cache: yarn
 
-before_install:
-  - printf "//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n" >> .npmrc
-
 # Run the the validate script
 install:
   - yarn global add bolt
@@ -15,6 +12,9 @@ install:
 script:
   - bolt build
   - bolt test
+
+before_deploy:
+  - printf "//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n" >> $HOME/.npmrc 2> /dev/null
 
 deploy:
   skip_cleanup: true
