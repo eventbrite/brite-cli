@@ -9,6 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@eventbrite/brite-core": "^0.0.1",
     "react-addons-test-utils": "^15.6.2"

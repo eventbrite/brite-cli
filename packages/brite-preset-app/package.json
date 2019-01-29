@@ -7,6 +7,9 @@
   "private": true,
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^23.3.1",
