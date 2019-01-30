@@ -11,6 +11,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@eventbrite/brite-cli": "0.0.1"
+    "@eventbrite/brite-cli": "0.0.2"
   }
 }
