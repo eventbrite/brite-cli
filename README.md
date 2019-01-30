@@ -1,5 +1,5 @@
 # Brite CLI
-Brite-CLI is a command line tool of plugins to run tasks such as linting, testing, etc, and presets to wrap up the plugins into reusable patterns.
+Brite-CLI is a collection of commands and configuration that creates a simple and consistent developer experience within Eventbrite applications and packages. 
 
 ### Packages
 * Brite-CLI
