@@ -87,7 +87,7 @@ export default ({
     port = DEFAULT_PORT,
     outputPath,
     basePath,
-    passThroughArgs,
+    passThroughArgs = [],
 }: IBriteCommandOptions) => {
     const config = {
     target: WEB_TARGET,
