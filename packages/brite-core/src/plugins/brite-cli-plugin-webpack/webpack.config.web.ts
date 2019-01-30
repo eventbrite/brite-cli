@@ -87,7 +87,9 @@ export default ({
     port = DEFAULT_PORT,
     outputPath,
     basePath,
-}: IBriteCommandOptions) => ({
+    passThroughArgs,
+}: IBriteCommandOptions) => {
+    const config = {
     target: WEB_TARGET,
     bail: !DEV_ENV,
     devtool: env === DEV_ENV ? 'cheap-module-eval-source-map' : 'source-map',
@@ -100,14 +102,14 @@ export default ({
             assertFileExists(path.resolve(cwd, basePath, 'index.js')),
         ],
     },
-    externals: [
+        externals: passThroughArgs.indexOf('--library') > - 1 ? [
         nodeExternals({
             modulesDir: path.resolve(cwd, 'node_modules'),
         }),
         nodeExternals({
             modulesDir: path.resolve(cwd, '../../node_modules'),
         }),
-    ],
+        ] : {},
     output: {
         path: outputPath || path.resolve(cwd, 'build'),
         filename: `[name].${WEB_TARGET}.js`,
@@ -167,4 +169,7 @@ export default ({
         ...(env === PROD_ENV ? getProdPlugins() : []),
     ],
     ...(env === DEV_ENV ? getDevServerConfig(port) : {stats: WEBPACK_STATS}),
-});
+    };
+
+    return config;
+};
