@@ -1,5 +1,13 @@
 {
 	"useTabs": true,
 	"trailingComma": "all",
-	"arrowParens": "always"
+	"arrowParens": "always",
+	"overrides": [
+		{
+			"files": "*.yaml",
+			"options": {
+				"useTabs": false
+			}
+		}
+	]
 }

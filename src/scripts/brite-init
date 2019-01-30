@@ -1,0 +1,12 @@
+#!/bin/sh
+source brite-script
+
+DIR=`pwd`
+NAME=`basename $(pwd)`
+
+if [ -d "$DIR/.git" ]; then
+  if [[ -n $(git status -s) ]]; then
+    echo "The current git repository is dirty, exiting to avoid conflicts"
+    exit 1
+  fi
+fi

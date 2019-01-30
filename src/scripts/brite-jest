@@ -1,0 +1,4 @@
+#!/bin/sh
+source brite-script
+
+task jest $@

@@ -1,0 +1,166 @@
+#!/bin/sh
+set -e
+set -o pipefail # TODO: Should we be using this?
+
+# Only create these if the script has not been run yet.
+if [ "$___BRITE_CLI_IS_RUNNING" = "" ]; then
+  BRITE_SCRIPT_START_TIME=$(date +%s)
+
+  # Track failed tasks to report at the end
+  declare -a FAILED_TASKS=()
+fi
+
+# If in terminal, force Chalk to output color
+# TODO: Make sure this doesn't run if in CI
+if [ -t 1 ]; then
+  export FORCE_COLOR=1
+fi
+
+# Constants
+# =========
+
+# Store some commonly used values as variables
+CURRENT_DIRECTORY=$(pwd)
+CURRENT_DIRECTORY_NAME=$(basename $CURRENT_DIRECTORY)
+
+# Ascii Color Codes for the Terminal
+TEXT_BOLD="\033[1m"
+TEXT_DIM="\033[2m"
+TEXT_RED="\033[31m"
+TEXT_RED="\033[31m"
+TEXT_CYAN="\033[36m"
+TEXT_GREEN="\033[32m"
+TEXT_YELLOW="\033[33m"
+TEXT_MAGENTA="\033[35m"
+TEXT_MAGENTA_BG="\033[45m"
+TEXT_RESET="\033[0m" # Always end with this
+
+LOG_PREFIX="       "
+INFO_PREFIX="${TEXT_MAGENTA}   info${TEXT_RESET}"
+SUCCESS_PREFIX="${TEXT_GREEN}success${TEXT_RESET}"
+WARNING_PREFIX="${TEXT_YELLOW}warning${TEXT_RESET}"
+ERROR_PREFIX="${TEXT_RED}  error${TEXT_RESET}"
+DEBUG_PREFIX="${TEXT_CYAN}  debug${TEXT_RESET}"
+
+# Helpers
+# =========
+
+# Log helpers
+# ex: `warning "Danger! Something happened"`
+log() {
+  echo "$LOG_PREFIX $@"
+}
+info() {
+  echo "$INFO_PREFIX $@"
+}
+success() {
+  echo "$SUCCESS_PREFIX $@"
+}
+warning() {
+  echo "$WARNING_PREFIX $@"
+}
+error() {
+  echo "$ERROR_PREFIX $@"
+}
+debug() {
+  if [ $DEBUG ]; then
+    echo "$DEBUG_PREFIX $@"
+  fi
+}
+
+# Insert horizontal rule
+# ex: `horizontal_rule`
+insert_horizontal_rule() {
+  local COLS=$(tput cols)
+  COLS=$((COLS - 2))
+  echo "${TEXT_DIM}$(printf '%*s\n' "${COLUMNS:-$COLS}" '' | tr ' ' ╴)${TEXT_RESET}"
+}
+
+# Run a command
+# ex: `task babel src -Dd dist`
+task() {
+  info "Task ${TEXT_CYAN}$1${TEXT_RESET} running..."
+
+  # Remember the exit code
+  exit_code=0
+
+  # Execute the commands and format the logs, if it fails, store the exit code
+  exec $@ | _pipe_task_logs $1 || exit_code=$?
+
+  # if the exit code is not still zero, save the failure
+  if [ "$exit_code" -eq 0 ]; then
+    success "Task ${TEXT_CYAN}$1${TEXT_RESET} passed."
+  else
+    error "Task ${TEXT_CYAN}$1${TEXT_RESET} failed! (code: $exit_code)"
+    FAILED_TASKS+=($1)
+  fi
+}
+
+# Internal helpers
+# ================
+
+# Format logs as they come in, wrap it with horizontal rules, but only if there
+# are actually logs
+_pipe_task_logs() {
+  run=true
+  while IFS= read -r log_line; do
+    if [ "$run" = true ]; then
+      horizontal_rule
+      run=false
+    fi
+    echo "${TEXT_CYAN}$1 >${TEXT_RESET}" $log_line
+  done
+  if [ "$run" = false ]; then
+    insert_horizontal_rule
+  fi
+}
+
+# Handler for when script finally exits
+_on_exit_handler() {
+  BRITE_SCRIPT_END_TIME=$(date +%s)
+  BRITE_SCRIPT_TOTAL_TIME=$((BRITE_SCRIPT_END_TIME - BRITE_SCRIPT_START_TIME))
+  insert_horizontal_rule
+
+  # Report any failed tasks
+  if [ -n "$FAILED_TASKS" ]; then
+    error "The following tasks failed:"
+    for task in $FAILED_TASKS; do
+      log "- ${TEXT_RED}$task${TEXT_RESET}"
+    done
+    insert_horizontal_rule
+  fi
+
+  # Report time script took
+  log "${TEXT_MAGENTA}Done in $((BRITE_SCRIPT_TOTAL_TIME))s.${TEXT_RESET}"
+
+  echo ""
+  echo ""
+
+  # Exit with 1 if any failed tasks
+  if [ -n "$FAILED_TASKS" ]; then
+    exit 1
+  fi
+}
+
+# Internal setup
+# ==============
+
+# If this script has not been run yet, set everything up
+if [ "$___BRITE_CLI_IS_RUNNING" = "" ]; then
+  ___BRITE_CLI_IS_RUNNING=true
+
+  # Add exit handler
+  trap _on_exit_handler EXIT
+
+  # Introduction:
+  echo ""
+  echo ""
+  log "${TEXT_BOLD}${TEXT_MAGENTA_BG} Brite CLI ${TEXT_RESET}"
+  insert_horizontal_rule
+  debug "PATH=$PATH"
+  debug "CURRENT_DIRECTORY=$CURRENT_DIRECTORY"
+  debug "CURRENT_DIRECTORY_NAME=$CURRENT_DIRECTORY_NAME"
+  if [ $DEBUG ]; then
+    insert_horizontal_rule
+  fi
+fi

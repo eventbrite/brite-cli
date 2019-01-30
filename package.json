@@ -4,6 +4,17 @@
 	"main": "index.js",
 	"author": "Jonathan Creamer <jonathancreamer@eventbrite.com>",
 	"license": "MIT",
+	"bin": {
+		"brite-babel": "dist/srcipts/brite-babel",
+		"brite-eslint": "dist/srcipts/brite-eslint",
+		"brite-init": "dist/srcipts/brite-init",
+		"brite-jest": "dist/srcipts/brite-jest",
+		"brite-prettier": "dist/srcipts/brite-prettier",
+		"brite-sasslint": "dist/srcipts/brite-sasslint",
+		"brite-script": "dist/srcipts/brite-script",
+		"brite-typescript": "dist/srcipts/brite-typescript",
+		"brite-webpack": "dist/srcipts/brite-webpack"
+	},
 	"bolt": {
 		"workspaces": [
 			"packages/*"
@@ -19,6 +30,7 @@
 		"@types/jest": "^23.3.1",
 		"@types/node": "^10.5.7",
 		"@types/react": "^16.4.12",
+		"babel-cli": "^6.26.0",
 		"babel-core": "^6.24.1",
 		"babel-eslint": "^7.0.0",
 		"babel-jest": "^21.2.0",
