@@ -1,6 +1,6 @@
 {
   "name": "@eventbrite/brite-core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A CLI around building Eventbrite applications.",
   "main": "dist/index.js",
   "keywords": [],

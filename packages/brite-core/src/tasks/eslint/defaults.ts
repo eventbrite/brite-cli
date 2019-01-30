@@ -1,6 +1,5 @@
 export default {
     parser: 'babel-eslint',
-    useEslintrc: false,
     cache: true,
     baseConfig: {
         env: {
