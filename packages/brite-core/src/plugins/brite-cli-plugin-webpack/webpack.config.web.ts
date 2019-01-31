@@ -87,7 +87,7 @@ export default ({
     port = DEFAULT_PORT,
     outputPath,
     basePath,
-    passThroughArgs,
+    passThroughArgs = [],
 }: IBriteCommandOptions) => ({
     target: WEB_TARGET,
     bail: !DEV_ENV,
