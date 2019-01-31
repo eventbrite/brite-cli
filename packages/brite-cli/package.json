@@ -1,6 +1,6 @@
 {
   "name": "@eventbrite/brite-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A CLI around building Eventbrite applications.",
   "main": "dist/brite.js",
   "bin": {
@@ -13,7 +13,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@eventbrite/brite-core": "^0.0.2",
+    "@eventbrite/brite-core": "^0.0.3",
     "react-addons-test-utils": "^15.6.2"
   },
   "devDependencies": {
