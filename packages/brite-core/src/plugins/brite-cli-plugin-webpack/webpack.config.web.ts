@@ -87,6 +87,7 @@ export default ({
     port = DEFAULT_PORT,
     outputPath,
     basePath,
+    passThroughArgs,
 }: IBriteCommandOptions) => ({
     target: WEB_TARGET,
     bail: !DEV_ENV,
@@ -100,14 +101,14 @@ export default ({
             assertFileExists(path.resolve(cwd, basePath, 'index.js')),
         ],
     },
-    externals: [
+    externals: passThroughArgs.indexOf('--library') > - 1 ? [
         nodeExternals({
             modulesDir: path.resolve(cwd, 'node_modules'),
         }),
         nodeExternals({
             modulesDir: path.resolve(cwd, '../../node_modules'),
         }),
-    ],
+    ] : [],
     output: {
         path: outputPath || path.resolve(cwd, 'build'),
         filename: `[name].${WEB_TARGET}.js`,
