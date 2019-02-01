@@ -1,8 +1,0 @@
-{
-	"name": "test-app",
-	"version": "1.0.0",
-	"description": "A test app for our webpack plugin.",
-	"keywords": [],
-	"author": "",
-	"license": "ISC"
-}

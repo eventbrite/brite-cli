@@ -1,5 +1,5 @@
 #!/bin/sh
-source brite-script
+source _base.sh
 
 # If no arguments were passed, run on all possible files, otherwise run on just
 # files passed

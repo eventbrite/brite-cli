@@ -1,4 +1,4 @@
 #!/bin/sh
-source brite-script
+source _base.sh
 
 task eslint src
