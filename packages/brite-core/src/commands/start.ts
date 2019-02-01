@@ -5,7 +5,7 @@ import { BaseBriteCommand, BriteCommandResult } from './command';
  * Run webpack, all kinds of fun start things
  */
 export default class BriteStartCommand extends BaseBriteCommand {
-    public defaultEnvironment = 'develpment';
+    public defaultEnvironment = 'development';
 
     /**
      * Executes the start command
