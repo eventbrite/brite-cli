@@ -3,9 +3,8 @@ set -e
 set -o pipefail # TODO: Should we be using this?
 
 # Only create these if the script has not been run yet.
-if [ "$_BRITE_IS_RUNNING" = "" ]; then
+if [ "$_BRITE_START_TIME" = "" ]; then
   _BRITE_START_TIME=$(date +%s)
-  _BRITE_IS_RUNNING=true
 fi
 
 source _colors.sh
@@ -30,7 +29,7 @@ _on_exit_handler() {
   fi
 
   # Report time script took
-  log "${TEXT_MAGENTA}Done in $((_BRITE_SCRIPT_TOTAL_TIME))s.${TEXT_RESET}"
+  log "${TEXT_MAGENTA}Done in ${_BRITE_TOTAL_TIME}s.${TEXT_RESET}"
 
   echo ""
   echo ""
@@ -45,8 +44,8 @@ _on_exit_handler() {
 # ==============
 
 # If this script has not been run yet, set everything up
-if [ "$___BRITE_CLI_IS_RUNNING" = "" ]; then
-  ___BRITE_CLI_IS_RUNNING=true
+if [ "$_BRITE_IS_RUNNING" = "" ]; then
+  _BRITE_IS_RUNNING=true
 
   # Add exit handler
   trap _on_exit_handler EXIT
