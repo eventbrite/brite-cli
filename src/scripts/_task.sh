@@ -33,7 +33,7 @@ _task_format_piped_logs() {
   _has_run=false
   while IFS= read -r _log_line; do
     if [ "$_has_run" = false ]; then
-      horizontal_rule
+      insert_horizontal_rule
       _has_run=true
     fi
     echo "${TEXT_CYAN}$1 >${TEXT_RESET} $_log_line"
