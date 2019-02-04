@@ -8,3 +8,6 @@ build
 yarn-error.log
 .eslintcache
 junit.xml
+
+#editor stuffs
+.idea
