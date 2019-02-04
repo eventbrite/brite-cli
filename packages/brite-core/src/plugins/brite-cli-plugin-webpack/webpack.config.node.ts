@@ -59,6 +59,7 @@ export default ({
                 use: {
                     loader: 'babel-loader',
                     options: {
+                        babelrc: false,
                         presets: [
                             [
                                 'env',
